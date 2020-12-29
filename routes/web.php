@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
-Route::get('admin', 'Auth\LoginController@login')->name('login');
+Route::get('login', 'Auth\LoginController@login')->name('login');
 Route::post('login', 'Auth\LoginController@postLogin')->name('postLogin');
 Route::get('admin/index', 'HomeController@index')->name('home');
-Route::get('admin/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 // user route
 Route::get('admin/users', 'HomeController@users')->name('users');
 Route::get('admin/user/add', 'HomeController@addUser')->name('addUser');
@@ -35,6 +35,9 @@ Route::post('admin/user/edit-password/{id}', 'HomeController@postEditPassword')-
 Route::get('/', function () {
     return view('index');
 });
+// booking 
+Route::get('booking', 'Controller@booking')->name('booking');
+// end booking
 
 
 // Route::get('/listLab', function () {

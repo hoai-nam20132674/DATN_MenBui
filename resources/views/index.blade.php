@@ -15,7 +15,7 @@
           <a class="nav-link" href="{{URL::route('login')}}">SINH VIÊN</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{URL::route('login')}}">DOANH NGHIỆP</a>
+          <a class="nav-link" href="{{URL::route('booking')}}">ĐẶT CHỖ</a>
         </li>    
       </ul>
     </div>   

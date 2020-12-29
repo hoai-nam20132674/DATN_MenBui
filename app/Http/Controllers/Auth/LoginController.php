@@ -55,6 +55,9 @@ class LoginController extends Controller
             return redirect()->route('home');
             
         }
+        else if(Auth::attempt($login) && Auth::user()->role ==0){
+            return redirect('/');
+        }
         else{
             return redirect()->back()->with(['flash_level'=>'danger','flash_message'=>'Tài khoản hoặc mật khẩu không chính xác']);
         }
@@ -62,12 +65,18 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
+        $role = Auth::user()->role;
         $this->guard()->logout();
 
         $request->session()->flush();
 
         $request->session()->regenerate();
+        if($role ==1){
 
-        return redirect()->route('login');
+            return redirect()->route('login');
+        }
+        else{
+            return redirect()->back();
+        }
     }
 }
