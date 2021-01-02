@@ -343,24 +343,50 @@
       }
     });
     var book = 0;
+
     $(".seat-free img").on('click', function(e) {
-      if(book == 0) {
-        $(this).attr("src","./assets/images/movie/seat01-free.png");
-        book = 1;
+      var check = $(this).parent().attr('check');
+      var type_bk = $('select[name="type"]').val();
+      var count = $(".single-seat[check=1]").length;
+      var dk = 0;
+      if((type_bk == 0 && count <1) || type_bk !=0 ){
+        dk = 1;
       }
-      else if(book == 1) {
-        $(this).attr("src","./assets/images/movie/seat01-booked.png");
-        book = 0;
+      if(check == 0 && dk ==1) {
+        $(this).attr("src","images/seat01-booked.png");
+        $(this).parent().attr('check','1');
+        var seat_name = $(this).parent().children(".sit-num").text();
+        $(".seat-name").append(seat_name+', ');
+        var count = $(".single-seat[check=1]").length;
+        $(".seat-count").html(count);
+      }
+      else if(check == 1) {
+        $(this).attr("src","images/seat01-free.png");
+        $(this).parent().attr('check','0');
+        var seat_name = $(this).parent().children(".sit-num").text();
+        var seat_name_ol = $(".seat-name").text();
+        seat_name_ol = seat_name_ol.replace(seat_name+","," ");
+        $(".seat-name").html(seat_name_ol);
+        var count = $(".single-seat[check=1]").length;
+        $(".seat-count").html(count);
+      }
+      else{
+        Swal.fire({
+      icon: 'error',
+      title: 'BẠN ĐÃ CHỌN CHỖ NGỒI',
+      text: 'Bạn chỉ được đặt 1 chỗ ngồi với hình thức đặt cá nhân',
+      footer: ''
+    })
       }
     });
     var bookTwo = 1;  
     $(".seat-free-two img").on('click', function(e) {
       if(bookTwo == 0) {
-        $(this).attr("src","./assets/images/movie/seat02-free.png");
+        $(this).attr("src","images/seat02-free.png");
         bookTwo = 1;
       }
       else if(bookTwo == 1) {
-        $(this).attr("src","./assets/images/movie/seat02-booked.png");
+        $(this).attr("src","images/seat02-booked.png");
         bookTwo = 0;
       }
     });

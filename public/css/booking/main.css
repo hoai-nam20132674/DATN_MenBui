@@ -829,6 +829,10 @@ input[type="submit"] {
   padding: 0;
 }
 
+.seat-free:hover {
+  border: 1px solid;
+}
+
 .bg_img {
   background-size: cover;
   background-position: center center;
@@ -1297,7 +1301,8 @@ input[type="submit"] {
 }
 
 .header-wrapper .logo {
-  width: 170px;
+  width: 315px;
+  background: #fff;
 }
 
 @media (max-width: 1199px) and (min-width: 992px) {
@@ -1333,7 +1338,7 @@ input[type="submit"] {
     position: relative;
   }
   .header-wrapper .menu li a {
-    color: #e9eeff;
+    color: #fff;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
@@ -4634,7 +4639,10 @@ input[type="submit"] {
 }
 
 .single-seat:hover .sit-num {
-  display: none;
+  /*display: none;*/
+  color: #fff;
+  font-weight: 800;
+  z-index: -10;
 }
 
 @media (max-width: 767px) {
