@@ -133,6 +133,18 @@
         headerOne.addClass("header-active");
       }
     });
+    //
+    // var bkOne = $(".bg-one");
+    // var height_banner = $(".seat-plan-banner").height();
+    // $(window).on('scroll', function () {
+    //   if ($(this).scrollTop() < 500) {
+    //     bkOne.removeClass("bg-one-active");
+    //   } else {
+    //     bkOne.addClass("bg-one-active");
+    //     console.log(height_banner);
+    //   }
+    // });
+    //
     $('.window-warning .lay').on('click', function() {
       $('.window-warning').addClass('inActive');
     })

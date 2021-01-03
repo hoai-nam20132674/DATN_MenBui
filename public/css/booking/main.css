@@ -1563,6 +1563,18 @@ input[type="submit"] {
   -webkit-animation-duration: 1s;
   -moz-animation-duration: 1s;
 }
+.bg-one.bg-one-active {
+  position: fixed;
+  top: 30px;
+  width: 100%;
+  
+  animation-name: fadeInDown;
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+}
 
 .header-bar {
   width: 30px;
