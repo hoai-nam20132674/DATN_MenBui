@@ -4592,7 +4592,7 @@ input[type="submit"] {
 }
 
 .seat-area .seat-line ul.seat--area {
-  width: calc(100% - 60px);
+  width: calc(100%);
 }
 
 @media (max-width: 991px) and (min-width: 768px) {

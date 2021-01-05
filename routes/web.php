@@ -36,7 +36,9 @@ Route::get('/', function () {
     return view('index');
 });
 // booking 
-Route::get('booking', 'Controller@booking')->name('booking');
+Route::get('booking/{id}', 'Controller@booking')->name('booking');
+Route::get('check-booking/{id}', 'Controller@checkBooking')->name('check_booking');
+Route::get('check/{id}/{timeIn}/{timeOut}', 'Controller@checkSeatFree')->name('checkSeat');
 // end booking
 
 

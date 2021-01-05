@@ -365,15 +365,17 @@
         dk = 1;
       }
       if(check == 0 && dk ==1) {
-        $(this).attr("src","images/seat01-booked.png");
+        $(this).attr("src","/images/seat01-booked.png");
         $(this).parent().attr('check','1');
         var seat_name = $(this).parent().children(".sit-num").text();
         $(".seat-name").append(seat_name+', ');
         var count = $(".single-seat[check=1]").length;
         $(".seat-count").html(count);
+        // var seat_if = $(this).parent().attr('seat_id');
+        // console.log(seat_if);
       }
       else if(check == 1) {
-        $(this).attr("src","images/seat01-free.png");
+        $(this).attr("src","/images/seat01-free.png");
         $(this).parent().attr('check','0');
         var seat_name = $(this).parent().children(".sit-num").text();
         var seat_name_ol = $(".seat-name").text();
@@ -398,7 +400,7 @@
         bookTwo = 1;
       }
       else if(bookTwo == 1) {
-        $(this).attr("src","images/seat02-booked.png");
+        $(this).attr("src","/images/seat02-booked.png");
         bookTwo = 0;
       }
     });
