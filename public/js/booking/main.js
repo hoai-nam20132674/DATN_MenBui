@@ -388,11 +388,11 @@
       }
       else{
         Swal.fire({
-      icon: 'error',
-      title: 'BẠN ĐÃ CHỌN CHỖ NGỒI',
-      text: 'Bạn chỉ được đặt 1 chỗ ngồi với hình thức đặt cá nhân',
-      footer: ''
-    })
+          icon: 'error',
+          title: 'BẠN ĐÃ CHỌN CHỖ NGỒI',
+          text: 'Bạn chỉ được đặt 1 chỗ ngồi với hình thức đặt cá nhân',
+          footer: ''
+        })
       }
     });
     var bookTwo = 1;  

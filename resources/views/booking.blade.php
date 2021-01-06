@@ -224,9 +224,16 @@
                     <li>
                         <a href="contact.html">Liên hệ</a>
                     </li>
-                    <li class="header-button pr-0">
-                        <a href="sign-up.html">Đăng nhập</a>
-                    </li>
+                    @if(Auth::user())
+                        <li class="header-button pr-0" id="user" user-id="{{Auth::user()->id}}">
+                            <a href="#">{{Auth::user()->name}}</a>
+                        </li>
+                    @else
+                        <li class="header-button pr-0" id="user" user-id="0">
+                            <a href="sign-up.html">Đăng nhập</a>
+                        </li>
+                    @endif
+                    
                 </ul>
                 <div class="header-bar d-lg-none">
 					<span></span>
@@ -452,7 +459,7 @@
                         <h3 class="title seat-count"></h3>
                     </div>
                     <div class="book-item">
-                        <a href="movie-checkout.html" class="custom-button">ĐẶT LỊCH GIỮ CHỖ</a>
+                        <a href="#" class="custom-button seat-booking-button">ĐẶT LỊCH GIỮ CHỖ</a>
                     </div>
                 </div>
             </div>
@@ -536,9 +543,10 @@
         $(document).ready(function(){
             $(".ajaxload").hide();
             var lab_id = $('.seat-area').attr('lab-id');
+            var date = $('input[name="date"]').val();
             var timeIn = $('input[name="timeIn"]').val();
             var timeOut = $('input[name="timeOut"]').val();
-            var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+timeIn+'&timeOut='+timeOut;
+            var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
             $.ajax({
                 type: 'GET',
                 url: url,
@@ -547,6 +555,44 @@
                     $('.seat-area').html(data); 
                 }
             });
+        });
+        $(document).on('click', '.seat-booking-button', function(event) {
+            event.preventDefault();
+            var type_bk = $('select[name="type"]').val();
+            var user_id = $('#user').attr('user-id');
+            if(user_id !=0){
+                if(type_bk == 0){
+                    var seatId = $('.seat-free[check=1]').attr('seat_id');
+                    var date = $('input[name="date"]').val();
+                    var timeIn = $('input[name="timeIn"]').val();
+                    var timeOut = $('input[name="timeOut"]').val();
+                    timeIn = date+' '+timeIn;
+                    timeOut = date+' '+timeOut;
+                    url = 'http://localhost:8000/user-booking/'+user_id+'?seatId='+seatId+'&timeIn='+timeIn+'&timeOut='+timeOut;
+                    // $.ajax({
+                    //     type: 'GET',
+                    //     url: url,
+                    //     dataType: 'html',
+                    //     success: function(data) {
+                    //         console.log(data);
+                    //         load.hide();
+                    //         old.show();
+                    //     }
+                    // });
+                    console.log(url)
+                }
+                else{
+
+                }
+            }
+            else{
+                Swal.fire({
+                  icon: 'error',
+                  title: 'VUI LÒNG ĐĂNG NHẬP',
+                  text: '',
+                  footer: ''
+                })
+            }
         });
     </script>
     <script type="text/javascript">
@@ -561,6 +607,7 @@
             else{
                 
                 $(".ajaxload").show();
+                // Swal.showLoading()
                 var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
                 $.ajax({
                     type: 'GET',

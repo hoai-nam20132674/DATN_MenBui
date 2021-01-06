@@ -8,9 +8,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Lab;
 use App\User;
+use App\Registration;
 use App\Http\Requests\addLabRequest;
 use App\Http\Requests\addUserRequest;
 use Hash;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -81,7 +83,18 @@ class HomeController extends Controller
 
     }
     // End User Custom
+    // user booking
+    public function userBooking($id, Requests $request){
+        $regis = new Registration;
+        $regis ->user_id = $id;
+        $regis ->seat_id = $request->seatId;
+        $regis ->time_in = Carbon($request->timeIn);
+        $regis ->time_out = Carbon($request->timeOut);
+        $regis ->save();
+        echo 1;
 
+    }
+    // end user booking
 
 
     
