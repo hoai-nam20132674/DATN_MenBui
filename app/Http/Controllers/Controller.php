@@ -18,22 +18,18 @@ class Controller extends BaseController
 
 
     public function booking($id, Request $request){
+        $timeIn = new Carbon($request->timeIn);
+        $timeOut = new Carbon($request->timeOut);
     	$seats = Seat::where('lab_id',$id)->get();
-    	return view('booking', compact('seats'));
+    	return view('booking', compact('seats','id','timeIn','timeOut'));
     	// dd($seats[15]);
 
     }
-    public function checkBooking($id, Request $request){
+    public function seatRender($id, Request $request){
     	$timeIn = new Carbon($request->timeIn);
     	$timeOut = new Carbon($request->timeOut);
-    	
-    	
-
-    	// $update = new Carbon($dt);
-    	// $now = Carbon::now();
-    	// echo $update;
     	$seats = Seat::where('lab_id',$id)->get();
-    	return view('booking', compact('seats','timeIn','timeOut'));
+    	return view('render.seatRender', compact('seats','timeIn','timeOut'));
     	
     }
     public static function checkSeatFree($id, $timeIn, $timeOut){
@@ -45,7 +41,7 @@ class Controller extends BaseController
     		$i=1;
     		foreach($registration as $rg){
     			
-    			if($timeIn>$rg->time_out || $timeOut<$rg->time_in){
+    			if($timeIn>=$rg->time_out || $timeOut<=$rg->time_in){
     				
     			}
     			else{

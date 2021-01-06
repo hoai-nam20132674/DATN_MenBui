@@ -17,6 +17,129 @@
     <link rel="stylesheet" href="{{asset('css/booking/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/booking/nice-select.css')}}">
     <link rel="stylesheet" href="{{asset('css/booking/main.css')}}">
+    <style type="text/css">
+        #loader {
+            bottom: 0;
+            height: 175px;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 175px;
+        }
+        #loader {
+            bottom: 0;
+            height: 175px;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 175px;
+        }
+        #loader .dot {
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            margin: auto;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 87.5px;
+        }
+        #loader .dot::before {
+            border-radius: 100%;
+            content: "";
+            height: 87.5px;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: scale(0);
+            width: 87.5px;
+        }
+        #loader .dot:nth-child(7n+1) {
+            transform: rotate(45deg);
+        }
+        #loader .dot:nth-child(7n+1)::before {
+            animation: 0.8s linear 0.1s normal none infinite running load;
+            background: #00ff80 none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+2) {
+            transform: rotate(90deg);
+        }
+        #loader .dot:nth-child(7n+2)::before {
+            animation: 0.8s linear 0.2s normal none infinite running load;
+            background: #00ffea none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+3) {
+            transform: rotate(135deg);
+        }
+        #loader .dot:nth-child(7n+3)::before {
+            animation: 0.8s linear 0.3s normal none infinite running load;
+            background: #00aaff none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+4) {
+            transform: rotate(180deg);
+        }
+        #loader .dot:nth-child(7n+4)::before {
+            animation: 0.8s linear 0.4s normal none infinite running load;
+            background: #0040ff none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+5) {
+            transform: rotate(225deg);
+        }
+        #loader .dot:nth-child(7n+5)::before {
+            animation: 0.8s linear 0.5s normal none infinite running load;
+            background: #2a00ff none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+6) {
+            transform: rotate(270deg);
+        }
+        #loader .dot:nth-child(7n+6)::before {
+            animation: 0.8s linear 0.6s normal none infinite running load;
+            background: #9500ff none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+7) {
+            transform: rotate(315deg);
+        }
+        #loader .dot:nth-child(7n+7)::before {
+            animation: 0.8s linear 0.7s normal none infinite running load;
+            background: magenta none repeat scroll 0 0;
+        }
+        #loader .dot:nth-child(7n+8) {
+            transform: rotate(360deg);
+        }
+        #loader .dot:nth-child(7n+8)::before {
+            animation: 0.8s linear 0.8s normal none infinite running load;
+            background: #ff0095 none repeat scroll 0 0;
+        }
+        #loader .lading {
+            background-image: url("../images/loading.gif");
+            background-position: 50% 50%;
+            background-repeat: no-repeat;
+            bottom: -40px;
+            height: 20px;
+            left: 0;
+            position: absolute;
+            right: 0;
+            width: 180px;
+        }
+        @keyframes load {
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+        }
+        @keyframes load {
+        100% {
+            opacity: 0;
+            transform: scale(1);
+        }
+        }
+
+    </style>
 
     <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTORaQqYrfLbfYj_YpqQcmbeyOkkE-S6hztGA&usqp=CAU" type="image/x-icon">
 
@@ -27,6 +150,7 @@
 
 <body>
     <!-- ==========Preloader========== -->
+    
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
@@ -149,11 +273,11 @@
 			                	
 			                		<div class="col-md-3">
 			                			<span class="date">Ngày</span>
-										<input type="date" onchange="consolelogvalue()" name="date">
+										<input type="date" onchange="seatRender()" name="date">
 			                		</div>
 			                		<div class="col-md-3">
 			                			<span class="date">Giờ vào</span>
-                                        <input type="time" name="timeIn" onchange="consolelogvalue()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        <input type="time" name="timeIn" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
 			                			<!-- <select class="timeIn" name="timeIn" onchange="timeInFunction()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
 					                        <option value="8">08:00</option>
 					                        <option value="9">09:00</option>
@@ -170,7 +294,7 @@
 			                		</div>
 			                		<div class="col-md-3">
 			                			<span class="date">Giờ ra</span>
-                                        <input type="time" name="timeOut" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        <input type="time" name="timeOut" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
 			                			<!-- <select class="timeOut" name="timeOut" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
 					                        
                                             <option value="9">09:00</option>
@@ -207,6 +331,21 @@
         </div>
     </section>
     <!-- ==========Page-Title========== -->
+    <div class="container ajaxload">
+        <div class="row">
+            <div id="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="lading"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- ==========Movie-Section========== -->
     <div class="seat-plan-section padding-bottom padding-top">
@@ -217,9 +356,9 @@
                     <img src="http://pixner.net/boleto/demo/assets/images/movie/screen-thumb.png" alt="movie">
                 </div>
                 <h5 class="subtitle">KHU VỰC CHECK IN</h5>
-                <div class="screen-wrapper">
-                    <ul class="seat-area">
-                        
+                
+                <div class="screen-wrapper" id="seat-area">
+                    <ul class="seat-area" lab-id="{{$id}}">
                         @php
                             $count = count($seats);
                         @endphp
@@ -294,311 +433,13 @@
                             
                         </li>
                         @endfor
+                        
 
                     </ul>
                 </div>
+
                 <h5 class="subtitle">LỐI ĐI</h5>
-                <!-- <div class="screen-wrapper">
-                    <ul class="seat-area ">
-                        
-                        <li class="seat-line">
-                            <span>d</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d1</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d2</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d3</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d5</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d6</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d7</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d9</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d11</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d12</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d13</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">d14</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>d</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>c</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c1</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c2</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c3</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c5</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c6</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c7</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c11</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c12</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c13</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">c14</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>c</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>b</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b1</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b2</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b3</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b5</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b6</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b7</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b11</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b12</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b13</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">b14</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>a</span>
-                        </li>
-                        <li class="seat-line">
-                            <span>a</span>
-                            <ul class="seat--area">
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a1</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a2</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a3</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a4</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a5</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a6</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a7</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a8</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a10</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="front-seat">
-                                    <ul>
-                                        <li class="single-seat seat-free" check="0" >
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a11</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a12</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a13</span>
-                                        </li>
-                                        <li class="single-seat seat-free" check="0">
-                                            <img src="http://pixner.net/boleto/demo/assets/images/movie/seat01-free.png" alt="seat">
-                                            <span class="sit-num">a14</span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <span>a</span>
-                        </li>
-                    </ul>
-                </div> -->
+                
             </div>
             <div class="proceed-book bg_img" data-background="./assets/images/movie/movie-bg-proceed.jpg">
                 <div class="proceed-to-book">
@@ -692,26 +533,57 @@
     <script src="{{asset('js/booking/nice-select.js')}}"></script>
     <script src="{{asset('js/booking/main.js')}}"></script>
     <script type="text/javascript">
-        function timeInFunction(){
-            var timeIn = $('select[name="timeIn"]').val();
-            $('.timeOut > option').each(function(){
-                var a = this.value;
-
-                if(a>timeIn){
-                    // $(this).attr('disabled');
-                    console.log(a);
+        $(document).ready(function(){
+            $(".ajaxload").hide();
+            var lab_id = $('.seat-area').attr('lab-id');
+            var timeIn = $('input[name="timeIn"]').val();
+            var timeOut = $('input[name="timeOut"]').val();
+            var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+timeIn+'&timeOut='+timeOut;
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'html',
+                success: function(data) {
+                    $('.seat-area').html(data); 
                 }
-                // alert(this.text + ' ' + this.value);
             });
-            // console.log(timeIn);
-        }
-        function consolelogvalue(){
-            var time = $('input[name="timeIn"]').val();
+        });
+    </script>
+    <script type="text/javascript">
+        function seatRender(){
+            var lab_id = $('.seat-area').attr('lab-id');
             var date = $('input[name="date"]').val();
+            var timeIn = $('input[name="timeIn"]').val();
+            var timeOut = $('input[name="timeOut"]').val();
+            if(timeIn==''||timeOut==''){
 
-            console.log(date + " " + time);
+            }
+            else{
+                
+                $(".ajaxload").show();
+                var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'html',
+                    success: function(data) {
+                        $('.seat-area').html(data);
+                        $(".ajaxload").hide();
+                        var count = (data.match(/seat-free="1"/g) || []).length;
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: 'Có '+count+' chỗ còn trống',
+                          showConfirmButton: false,
+                          timer: 1000
+                        })
+                        $('html, body').animate({
+                            scrollTop: $(".screen-area").offset().top
+                        }, 2000);
+                    }
+                });
+            }
         }
-
     </script>
 </body>
 

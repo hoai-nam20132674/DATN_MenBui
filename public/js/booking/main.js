@@ -356,7 +356,9 @@
     });
     var book = 0;
 
-    $(".seat-free img").on('click', function(e) {
+    // $(".seat-free img").on('click', function(event) {
+    $(document).on('click', '.seat-free img', function(event) {
+      event.preventDefault();
       var check = $(this).parent().attr('check');
       var type_bk = $('select[name="type"]').val();
       var count = $(".single-seat[check=1]").length;
