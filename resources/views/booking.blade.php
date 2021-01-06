@@ -489,7 +489,7 @@
             <div class="footer-top">
                 <div class="logo">
                     <a href="index-1.html">
-                        <img src="http://pixner.net/boleto/demo/assets/images/footer/footer-logo.png" alt="footer">
+                        <img src="https://www.hust.edu.vn/hust-theme/images/logoEn.png" alt="footer">
                     </a>
                 </div>
                 <ul class="social-icons">
@@ -547,6 +547,7 @@
             var timeIn = $('input[name="timeIn"]').val();
             var timeOut = $('input[name="timeOut"]').val();
             var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
+            console.log(url);
             $.ajax({
                 type: 'GET',
                 url: url,
@@ -569,17 +570,36 @@
                     timeIn = date+' '+timeIn;
                     timeOut = date+' '+timeOut;
                     url = 'http://localhost:8000/user-booking/'+user_id+'?seatId='+seatId+'&timeIn='+timeIn+'&timeOut='+timeOut;
-                    // $.ajax({
-                    //     type: 'GET',
-                    //     url: url,
-                    //     dataType: 'html',
-                    //     success: function(data) {
-                    //         console.log(data);
-                    //         load.hide();
-                    //         old.show();
-                    //     }
-                    // });
-                    console.log(url)
+                    $.ajax({
+                        type: 'GET',
+                        url: url,
+                        dataType: 'html',
+                        success: function(data) {
+                            if(data=='1'){
+                                Swal.fire({
+                                  position: 'top-end',
+                                  icon: 'success',
+                                  title: 'Đặt chỗ thành công',
+                                  showConfirmButton: false,
+                                  timer: 1000
+                                })
+                                $('html, body').animate({
+                                    scrollTop: $(".screen-area").offset().top
+                                }, 2000);
+
+                            }
+                            else{
+                                Swal.fire({
+                                  position: 'top-end',
+                                  icon: 'error',
+                                  title: 'Đặt chỗ không thành công',
+                                  showConfirmButton: false,
+                                  timer: 1000
+                                })
+                            }
+                        }
+                    });
+                    // console.log(url)
                 }
                 else{
 

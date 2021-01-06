@@ -84,12 +84,12 @@ class HomeController extends Controller
     }
     // End User Custom
     // user booking
-    public function userBooking($id, Requests $request){
+    public function userBooking($id, Request $request){
         $regis = new Registration;
         $regis ->user_id = $id;
         $regis ->seat_id = $request->seatId;
-        $regis ->time_in = Carbon($request->timeIn);
-        $regis ->time_out = Carbon($request->timeOut);
+        $regis ->time_in = new Carbon($request->timeIn);
+        $regis ->time_out = new Carbon($request->timeOut);
         $regis ->save();
         echo 1;
 

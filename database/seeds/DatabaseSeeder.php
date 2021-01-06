@@ -24,29 +24,29 @@ class UserSeeder extends Seeder
     public function run()
     {
         //
-        // DB::table('users')->insert([
-        // 	[
-        // 		'name' =>'Nam Nguyễn',
-        // 		'email' =>'namnguyen20132674@gmail.com',
-        // 		'password'=>Hash::make('1'),
-        //         'role' => 1,
-        //         'sex' => 1,
-        //         'phone' => '0848384333',
-        // 	]
+        DB::table('users')->insert([
+        	[
+        		'name' =>'Nam Nguyễn',
+        		'email' =>'namnguyen20132674@gmail.com',
+        		'password'=>Hash::make('1'),
+                'role' => 1,
+                'sex' => 1,
+                'phone' => '0848384333',
+        	]
         	
-        // 	]
-        // );
-        // DB::table('labs')->insert([
-        //     [
-        //         'name' =>'Lab 1',
-        //         'type' =>1,
-        //         'seat'=>100,
+        	]
+        );
+        DB::table('labs')->insert([
+            [
+                'name' =>'Lab 1',
+                'type' =>1,
+                'seat'=>100,
                 
-        //     ]
+            ]
 
             
-        //     ]
-        // );
+            ]
+        );
         for($i=0;$i<14;$i++){
             $name = 'a'.$i;
             DB::table('seats')->insert([
