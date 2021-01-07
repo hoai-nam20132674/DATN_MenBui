@@ -230,7 +230,7 @@
                         </li>
                     @else
                         <li class="header-button pr-0" id="user" user-id="0">
-                            <a href="sign-up.html">Đăng nhập</a>
+                            <a href="{{URL::route('login')}}">Đăng nhập</a>
                         </li>
                     @endif
                     

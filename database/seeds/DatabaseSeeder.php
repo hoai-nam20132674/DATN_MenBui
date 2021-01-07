@@ -26,13 +26,23 @@ class UserSeeder extends Seeder
         //
         DB::table('users')->insert([
         	[
-        		'name' =>'Nam Nguyễn',
+        		'name' =>'Nguyễn Hoài Nam',
+                'mssv' =>'20132674',
         		'email' =>'namnguyen20132674@gmail.com',
         		'password'=>Hash::make('1'),
                 'role' => 1,
                 'sex' => 1,
                 'phone' => '0848384333',
-        	]
+        	],
+            [
+                'name' =>'Bùi Thị Mến',
+                'mssv' =>'20166461',
+                'email' =>'menbt@gmail.com',
+                'password'=>Hash::make('1'),
+                'role' => 0,
+                'sex' => 0,
+                'phone' => '0842829222',
+            ]
         	
         	]
         );

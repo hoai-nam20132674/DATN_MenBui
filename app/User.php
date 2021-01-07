@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -36,4 +38,46 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function add($request){
+        if(Auth::user()->role == 1){
+            $this->name = $request->name;
+            $this->mssv = $request->mssv;
+            $this->email = $request->email;
+            $this->phone = $request->phone;
+            $this->role = $request->role;
+            $this->sex = $request->sex;
+            $this->password = Hash::make($request->password);
+            $this->save();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public function edit($request, $id){
+        if(Auth::user()->id == $id){
+            $user = $this::where('id',$id)->get()->first();
+            $user->name = $request->name;
+            $user->mssv = $request->mssv;
+            $user->phone = $request->phone;
+            $user->email = $request->email;
+            $user->save();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public function editPassword($request,$id){
+        if(Auth::user()->id == $id){
+            $user = $this::where('id',$id)->get()->first();
+            $user->password = Hash::make($request->password);
+            $user->save();
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

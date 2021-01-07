@@ -40,12 +40,12 @@
                     
                     
                     <li class="nav-item " id="cms-plugins-ecommerce">
-                        <a href="" class="nav-link nav-toggle">
+                        <a href="{{URL::route('labs')}}" class="nav-link nav-toggle">
                             <i class="fa fa-user-md"></i>
-                            <span class="title">Sản phẩm</span>
+                            <span class="title">Phòng lab</span>
                             <span class="arrow "></span>
                         </a>
-                        <ul class="sub-menu  hidden-ul ">
+                        <!-- <ul class="sub-menu  hidden-ul ">
                             <li class="nav-item " id="cms-plugins-ecommerce-customer">
                                 <a href="" class="nav-link">
                                     <i class="fa fa-users"></i>
@@ -60,7 +60,7 @@
                             </li>
                             
                             
-                        </ul>
+                        </ul> -->
                     </li>
                     <!-- <li class="nav-item " id="cms-plugins-simple-slider">
                         <a href="#" class="nav-link nav-toggle">
@@ -110,9 +110,15 @@
                         <ul class="sub-menu  hidden-ul ">
                             @if(Auth::user()->role ==1)
                             <li class="nav-item " id="cms-core-user">
-                                <a href="" class="nav-link">
+                                <a href="{{URL::route('usersAdmin')}}" class="nav-link">
                                     <i class="fa fa-user"></i>
                                     Quản trị viên
+                                </a>
+                            </li>
+                            <li class="nav-item " id="cms-core-user">
+                                <a href="{{URL::route('users')}}" class="nav-link">
+                                    <i class="fa fa-user"></i>
+                                    Sinh viên
                                 </a>
                             </li>
                             @endif

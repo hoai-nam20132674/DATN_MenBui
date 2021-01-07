@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class addUserRequest extends FormRequest
+class ImportExcelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +25,14 @@ class addUserRequest extends FormRequest
     {
         return [
             
-            'email' => 'unique:users,email',
-            'mssv' => 'unique:users,mssv',
-            'confirm_password'=>'same:password'
-            
+            'excel' => 'required|mimes:csv,xls,xlsx'
+
         ];
     }
     public function messages(){
         return [
-            'email.unique' => 'Email này đã được sử dụng',
-            'mssv.unique' => 'Mssv này đã được sử dụng',
-            'confirm_password.same'=>'Xác thực mật khẩu không chính xác'
+            'excel.required' => 'Vui lòng chọn file upload !',
+            'excel.mimes' => 'Định dạng file upload không đúng vui lòng chọn file .csv .xls hoặc xlsx !'
             
         ];
     }

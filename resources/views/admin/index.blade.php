@@ -32,7 +32,7 @@
                     <div id="main">
                             
     <div class="note note-success">
-        <p>Chào {{Auth::user()->name}} đến với trình quản trị nội dung của website Labohaiduong</p>
+        <p>Chào {{Auth::user()->name}} đến với trang quản trị nội dung</p>
     </div>
     <div class="row">
         
@@ -48,7 +48,7 @@
                 <div class="number">
                     <span data-counter="counterup" data-value="3">0</span>
                 </div>
-                <div class="desc"> Dịch vụ </div>
+                <div class="desc"> Phòng lab </div>
             </div>
         </a>
     </div>
@@ -62,7 +62,7 @@
                 <div class="number">
                     <span data-counter="counterup" data-value="12">0</span>
                 </div>
-                <div class="desc"> Khách hàng </div>
+                <div class="desc"> Đã đặt </div>
             </div>
         </a>
     </div>
@@ -76,7 +76,7 @@
                 <div class="number">
                     <span data-counter="counterup" data-value="1">0</span>
                 </div>
-                <div class="desc"> Liên hệ </div>
+                <div class="desc"> Còn trống </div>
             </div>
         </a>
     </div>

@@ -11,6 +11,7 @@ use App\User;
 use App\Registration;
 use App\Http\Requests\addLabRequest;
 use App\Http\Requests\addUserRequest;
+use App\Http\Requests\editPasswordRequest;
 use Hash;
 use Carbon\Carbon;
 
@@ -39,7 +40,11 @@ class HomeController extends Controller
 
     // User custom
     public function users(Request $request){
-        $users = User::select()->paginate(15);
+        $users = User::where('role',0)->paginate(15);
+        return view('admin.users',['users'=>$users,'request'=>$request]);
+    }
+    public function usersAdmin(Request $request){
+        $users = User::where('role',1)->paginate(15);
         return view('admin.users',['users'=>$users,'request'=>$request]);
     }
     public function addUser(){
@@ -83,6 +88,15 @@ class HomeController extends Controller
 
     }
     // End User Custom
+
+    // lab controller
+    public function labs(Request $request){
+        $labs = Lab::select()->paginate(15);
+        return view('admin.labs', compact('labs','request'));
+    }
+    // end lab controller
+
+
     // user booking
     public function userBooking($id, Request $request){
         $regis = new Registration;

@@ -53,7 +53,7 @@
                             </div>
                             <div class="dt-buttons btn-group"> 
                                 <button class="btn btn-secondary action-item" tabindex="0" aria-controls="table-users">
-                                    <span><span data-action="create" data-href="{{URL::route('addUser')}}"><i class="fa fa-plus"></i> Tạo mới</span></span>
+                                    <span><span data-action="create" data-href="{{URL::route('addLab')}}"><i class="fa fa-plus"></i> Tạo mới</span></span>
                                 </button> 
                                 <button class="btn btn-secondary buttons-reload" tabindex="0" aria-controls="table-users"><span><i class="fas fa-sync"></i> Tải lại</span></button> 
                             </div>
@@ -64,8 +64,8 @@
                                         <th width="10px" class="text-left no-sort sorting_disabled" title="<input class=&quot;table-check-all&quot; data-set=&quot;.dataTable .checkboxes&quot; type=&quot;checkbox&quot;>" rowspan="1" colspan="1" aria-label="" style="width: 37px;">
                                             <input class="table-check-all" data-set=".dataTable .checkboxes" type="checkbox">
                                         </th>
-                                        <th title="Tên đăng nhập" class="text-left column-key-username sorting_desc" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-sort="descending" aria-label="Tên đăng nhậporderby asc" style="width: 181px;">Tên đăng nhập</th>
-                                        <th title="Email" class="text-left column-key-email sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Emailorderby asc" style="width: 271px;">Email</th>
+                                        <th title="Tên đăng nhập" class="text-left column-key-username sorting_desc" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-sort="descending" aria-label="Tên đăng nhậporderby asc" style="width: 181px;">Tên lab</th>
+                                        <th title="Email" class="text-left column-key-email sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Emailorderby asc" style="width: 271px;">Số lượng ghế</th>
                                         
                                         <th title="Ngày tạo" width="100px" class="column-key-created_at sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Ngày tạoorderby asc" style="width: 100px;">Ngày tạo</th>
                                         <th title="Trạng thái" width="300px" class="column-key-status sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Trạng tháiorderby asc" style="width: 300px;">Trạng thái</th>
@@ -77,7 +77,7 @@
                                     @php
                                         $i=0
                                     @endphp
-                                    @foreach($users as $user)
+                                    @foreach($labs as $lab)
                                         
                                         @if($i%2 == 0)
                                         <tr role="row" class="odd">
@@ -87,28 +87,28 @@
                                             <td class=" text-left no-sort">
                                                 <div class="text-left">
                                                     <div class="checkbox checkbox-primary table-checkbox">
-                                                        <input type="checkbox" class="checkboxes" name="id[]" value="{{$user->id}}">
+                                                        <input type="checkbox" class="checkboxes" name="id[]" value="{{$lab->id}}">
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="text-left column-key-username sorting_1">
-                                                <a href="{{URL::route('editUser',$user->id)}}">{{$user->name}}</a>
+                                                <a href="">{{$lab->name}}</a>
                                             </td>
-                                            <td class=" text-left column-key-email">{{$user->email}}</td>
+                                            <td class=" text-left column-key-email">100</td>
                                             
-                                            <td class="  column-key-created_at">{{$user->created_at}}</td>
+                                            <td class="  column-key-created_at">{{$lab->created_at}}</td>
                                             <td class="  column-key-status">
                                                 <a href="#" class="btn btn-success">Active</a>
-                                                @if($user->role ==1)
-                                                <a href="#" onclick="change({{$user->id}})" class="btn btn-info">Quản trị viên</a>
+                                                @if($lab->type ==1)
+                                                <a href="#" onclick="change({{$lab->id}})" class="btn btn-info">Phòng tự học</a>
                                                 @else
-                                                <a href="#" onclick="change({{$user->id}})" class="btn btn-info">Sinh viên</a>
+                                                <a href="#" onclick="change({{$lab->id}})" class="btn btn-info">Phòng đọc</a>
                                                 @endif
                                             </td>
                                             
                                             <td class=" text-right">
-                                                
-                                                <a href="{{URL::route('editUser',$user->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="View user's profile"><i class="fa fa-eye"></i></a>
+                                                <a href="{{URL::route('editLab',$lab->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="View user's profile"><i class="fa fa-eye"></i></a>
+                                                <a href="{{URL::route('editLab',$lab->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="View user's profile"><i class="fa fa-eye"></i></a>
                                                 <a href="#" class="btn btn-icon btn-danger deleteDialog" data-toggle="tooltip" data-section="" role="button" data-original-title="Xóa bản ghi"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>

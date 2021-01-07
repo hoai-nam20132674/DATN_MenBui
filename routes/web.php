@@ -23,6 +23,7 @@ Route::get('admin/index', 'HomeController@index')->name('home');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 // user route
 Route::get('admin/users', 'HomeController@users')->name('users');
+Route::get('admin/users-admin', 'HomeController@usersAdmin')->name('usersAdmin');
 Route::get('admin/user/add', 'HomeController@addUser')->name('addUser');
 Route::post('admin/user/add', 'HomeController@postAddUser')->name('postAddUser');
 Route::get('admin/user/edit/{id}', 'HomeController@editUser')->name('editUser');
@@ -30,11 +31,18 @@ Route::post('admin/user/edit/{id}', 'HomeController@postEditUser')->name('postEd
 Route::post('admin/user/edit-password/{id}', 'HomeController@postEditPassword')->name('postEditPassword');
 Route::get('user-booking/{id}', 'HomeController@userBooking')->name('userBooking');
 // end user route
+// lab route
+Route::get('admin/labs', 'HomeController@labs')->name('labs');
+Route::get('admin/lab/add', 'HomeController@addLab')->name('addLab');
+Route::post('admin/lab/add', 'HomeController@postAddLab')->name('postAddLab');
+Route::get('admin/lab/edit/{id}', 'HomeController@editLab')->name('editLab');
+Route::post('admin/lab/edit/{id}', 'HomeController@postEditLab')->name('postEditLab');
+// end lab route
 
 
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 // booking 
 Route::get('booking/{id}', 'Controller@booking')->name('booking');

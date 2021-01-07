@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class addUserRequest extends FormRequest
+class editServiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,17 +25,16 @@ class addUserRequest extends FormRequest
     {
         return [
             
-            'email' => 'unique:users,email',
-            'mssv' => 'unique:users,mssv',
-            'confirm_password'=>'same:password'
+            'url' => 'unique:service_cates,url|unique:blogs,url|unique:blog_cates,url|unique:product_cates,url|unique:products,url|unique:services,url,'.$this->id,
+
+            
             
         ];
     }
     public function messages(){
         return [
-            'email.unique' => 'Email này đã được sử dụng',
-            'mssv.unique' => 'Mssv này đã được sử dụng',
-            'confirm_password.same'=>'Xác thực mật khẩu không chính xác'
+            
+            'url.unique' => 'Đường dẫn này đã được sử dụng'
             
         ];
     }

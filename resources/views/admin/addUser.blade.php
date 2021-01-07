@@ -39,11 +39,14 @@
                         <div class="main-form">
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="form-group col-md-12"  >
+                                    <div class="form-group col-md-6"  >
                                         <label for="name" class="control-label required">Họ và Tên</label>
                                         <input class="form-control" data-counter="30" name="name" type="text" value="" required id="name">
                                     </div>
-                                    
+                                    <div class="form-group col-md-6"  >
+                                        <label for="mssv" class="control-label required">Mã số sinh viên</label>
+                                        <input class="form-control" data-counter="30" name="mssv" type="text" value="" required id="mssv">
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6"  >
@@ -121,13 +124,29 @@
                             
                         <div class="widget meta-boxes">
                             <div class="widget-title">
+                                <h4><label for="role_id" class="control-label">Giới tính</label></h4>
+                            </div>
+                            <div class="widget-body">
+                                <div class="ui-select-wrapper">
+                                    <select class="form-control roles-list ui-select ui-select" id="role_id" name="sex">
+                                        <option value="1" >Nam</option>
+                                        <option value="0" >Nữ</option>
+                                    </select>
+                                    <svg class="svg-next-icon svg-next-icon-size-16">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget meta-boxes">
+                            <div class="widget-title">
                                 <h4><label for="role_id" class="control-label">Ph&acirc;n quy&ecirc;̀n</label></h4>
                             </div>
                             <div class="widget-body">
                                 <div class="ui-select-wrapper">
                                     <select class="form-control roles-list ui-select ui-select" id="role_id" name="role">
-                                        <option value="0" selected="selected">Biên tập viên</option>
-                                        <option value="1" >Quản trị cấp cao</option>
+                                        <option value="0" selected="selected">Sinh viên</option>
+                                        <option value="1" >Quản trị</option>
                                     </select>
                                     <svg class="svg-next-icon svg-next-icon-size-16">
                                         <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select-chevron"></use>
