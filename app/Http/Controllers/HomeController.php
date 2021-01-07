@@ -9,11 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Lab;
 use App\User;
 use App\Registration;
+use App\Seat;
 use App\Http\Requests\addLabRequest;
 use App\Http\Requests\addUserRequest;
 use App\Http\Requests\editPasswordRequest;
 use Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -94,18 +96,37 @@ class HomeController extends Controller
         $labs = Lab::select()->paginate(15);
         return view('admin.labs', compact('labs','request'));
     }
+    public function lab($id, Request $request){
+        $timeIn = new Carbon($request->timeIn);
+        $timeOut = new Carbon($request->timeOut);
+        $seats = Seat::where('lab_id',$id)->get();
+        return view('admin.lab', compact('seats','id','timeIn','timeOut'));
+    }
     // end lab controller
 
 
     // user booking
-    public function userBooking($id, Request $request){
-        $regis = new Registration;
-        $regis ->user_id = $id;
-        $regis ->seat_id = $request->seatId;
-        $regis ->time_in = new Carbon($request->timeIn);
-        $regis ->time_out = new Carbon($request->timeOut);
-        $regis ->save();
-        echo 1;
+    public function userBooking($mssv, Request $request){
+        $user = User::where('mssv',$mssv)->get();
+        if(count($user) ==0){
+            echo 0;
+        }
+        else{
+            $user = $user->first();
+            $regis = new Registration;
+            $regis ->user_id = $user->id;
+            $regis ->seat_id = $request->seatId;
+            $regis ->time_in = new Carbon($request->timeIn);
+            $regis ->time_out = new Carbon($request->timeOut);
+            if(Auth::user()->id == $user->id){
+                $regis->status =1;
+            }
+            else{
+                $regis->status =0;
+            }
+            $regis ->save();
+            echo 1;
+        }
 
     }
     // end user booking

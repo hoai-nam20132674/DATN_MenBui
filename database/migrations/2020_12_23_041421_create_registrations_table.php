@@ -21,6 +21,7 @@ class CreateRegistrationsTable extends Migration
             $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
             $table->dateTime('time_in');
             $table->dateTime('time_out');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

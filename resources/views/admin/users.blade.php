@@ -67,7 +67,7 @@
                                         <th title="Tên đăng nhập" class="text-left column-key-username sorting_desc" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-sort="descending" aria-label="Tên đăng nhậporderby asc" style="width: 181px;">Tên đăng nhập</th>
                                         <th title="Email" class="text-left column-key-email sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Emailorderby asc" style="width: 271px;">Email</th>
                                         
-                                        <th title="Ngày tạo" width="100px" class="column-key-created_at sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Ngày tạoorderby asc" style="width: 100px;">Ngày tạo</th>
+                                        <th title="Ngày tạo" width="100px" class="column-key-created_at sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Ngày tạoorderby asc" style="width: 100px;">Mã số sinh viên</th>
                                         <th title="Trạng thái" width="300px" class="column-key-status sorting" tabindex="0" aria-controls="table-users" rowspan="1" colspan="1" aria-label="Trạng tháiorderby asc" style="width: 300px;">Trạng thái</th>
                                         
                                         <th title="Tác vụ" width="150px" class="text-right sorting_disabled" rowspan="1" colspan="1" aria-label="Tác vụ" style="width: 150px;">Tác vụ</th>
@@ -96,7 +96,7 @@
                                             </td>
                                             <td class=" text-left column-key-email">{{$user->email}}</td>
                                             
-                                            <td class="  column-key-created_at">{{$user->created_at}}</td>
+                                            <td class="  column-key-created_at">{{$user->mssv}}</td>
                                             <td class="  column-key-status">
                                                 <a href="#" class="btn btn-success">Active</a>
                                                 @if($user->role ==1)

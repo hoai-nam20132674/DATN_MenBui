@@ -225,7 +225,7 @@
                         <a href="contact.html">Liên hệ</a>
                     </li>
                     @if(Auth::user())
-                        <li class="header-button pr-0" id="user" user-id="{{Auth::user()->id}}">
+                        <li class="header-button pr-0" id="user" user-mssv="{{Auth::user()->mssv}}" user-id="{{Auth::user()->id}}">
                             <a href="#">{{Auth::user()->name}}</a>
                         </li>
                     @else
@@ -561,6 +561,7 @@
             event.preventDefault();
             var type_bk = $('select[name="type"]').val();
             var user_id = $('#user').attr('user-id');
+            var user_mssv = $('#user').attr('user-mssv');
             if(user_id !=0){
                 if(type_bk == 0){
                     var seatId = $('.seat-free[check=1]').attr('seat_id');
@@ -569,7 +570,8 @@
                     var timeOut = $('input[name="timeOut"]').val();
                     timeIn = date+' '+timeIn;
                     timeOut = date+' '+timeOut;
-                    url = 'http://localhost:8000/user-booking/'+user_id+'?seatId='+seatId+'&timeIn='+timeIn+'&timeOut='+timeOut;
+                    url = 'http://localhost:8000/user-booking/'+user_mssv+'?seatId='+seatId+'&timeIn='+timeIn+'&timeOut='+timeOut;
+                    console.log(url);
                     $.ajax({
                         type: 'GET',
                         url: url,
@@ -602,6 +604,107 @@
                     // console.log(url)
                 }
                 else{
+                    var seatName = [];
+                    var steps = [];
+                    var seatId = [];
+                    var date = $('input[name="date"]').val();
+                    var timeIn = $('input[name="timeIn"]').val();
+                    var timeOut = $('input[name="timeOut"]').val();
+                    timeIn = date+' '+timeIn;
+                    timeOut = date+' '+timeOut;
+                    var i=0;
+                    $('.seat-free[check=1]').each(function()
+                    {
+                        var name = $(this).children(".sit-num").text();
+                        seatName[i] = {title:name, text:"Điền mã số sinh viên cho ghế "+name};
+                        steps[i] = i+1;
+                        seatId[i] = $(this).attr('seat_id');
+                        i++;
+                    });
+                    // console.log(seatName);
+                    Swal.mixin({
+                      input: 'text',
+                      confirmButtonText: 'Next &rarr;',
+                      showCancelButton: true,
+                      progressSteps: steps
+                    }).queue(
+                        seatName
+                    ).then((result) => {
+                      if (result.value) {
+                        const answers = JSON.stringify(result.value)
+                        // Swal.fire({
+                        //   title: 'All done!',
+                        //   html: `
+                        //     Your answers:
+                        //     <pre><code>${answers}</code></pre>
+                        //   `,
+                        //   confirmButtonText: 'Lovely!'
+                        // })
+                        var mssv = result.value;
+                        // console.log(mssv);
+                        Swal.fire({
+                          title: 'Bạn muốn đặt '+steps.length+' ghế cho '+answers,
+                          showDenyButton: true,
+                          showCancelButton: true,
+                          confirmButtonText: `Đặt ngay`,
+                          denyButtonText: `Hủy đặt`,
+                        }).then((result) => {
+                          /* Read more about isConfirmed, isDenied below */
+                          if (result.isConfirmed) {
+                            var j=0;
+                            var success = 0;
+                            $('.seat-free[check=1]').each(function()
+                            {
+                                var url = 'http://localhost:8000/user-booking/'+mssv[j]+'?seatId='+seatId[j]+'&timeIn='+timeIn+'&timeOut='+timeOut;
+                                j++;
+                                $.ajax({
+                                    type: 'GET',
+                                    url: url,
+                                    dataType: 'html',
+                                    success: function(data) {
+                                        if(data=='1'){
+                                            success++;
+
+                                        }
+                                        else{
+                                            
+                                        }
+                                    }
+                                });
+
+
+                            });
+                            Swal.fire('Saved!', 'Đặt chỗ thành công', 'success')
+                          } else if (result.isDenied) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                          }
+                        })
+                      }
+                    })
+                    // Swal.mixin({
+                    //   input: 'text',
+                    //   confirmButtonText: 'Next &rarr;',
+                    //   showCancelButton: true,
+                    //   progressSteps: ['1', '2', '3']
+                    // }).queue([
+                    //   {title:"Question 1", text:"Chaining swal2 modals is easy"},
+                    //   'Question 2',
+                    //   'Question 3'
+                    // ]).then((result) => {
+                    //   if (result.value) {
+                    //     const answers = JSON.stringify(result.value)
+                    //     Swal.fire({
+                    //       title: 'All done!',
+                    //       html: `
+                    //         Your answers:
+                    //         <pre><code>${answers}</code></pre>
+                    //       `,
+                    //       confirmButtonText: 'Lovely!'
+                    //     })
+                    //   }
+                    // })
+                    
+
 
                 }
             }

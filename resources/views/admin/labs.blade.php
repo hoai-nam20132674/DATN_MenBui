@@ -92,7 +92,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-left column-key-username sorting_1">
-                                                <a href="">{{$lab->name}}</a>
+                                                <a href="{{URL::route('lab',$lab->id)}}">{{$lab->name}}</a>
                                             </td>
                                             <td class=" text-left column-key-email">100</td>
                                             
@@ -107,7 +107,7 @@
                                             </td>
                                             
                                             <td class=" text-right">
-                                                <a href="{{URL::route('editLab',$lab->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="View user's profile"><i class="fa fa-eye"></i></a>
+                                                
                                                 <a href="{{URL::route('editLab',$lab->id)}}" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="View user's profile"><i class="fa fa-eye"></i></a>
                                                 <a href="#" class="btn btn-icon btn-danger deleteDialog" data-toggle="tooltip" data-section="" role="button" data-original-title="Xóa bản ghi"><i class="fa fa-trash"></i></a>
                                             </td>
