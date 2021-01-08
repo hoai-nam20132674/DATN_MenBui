@@ -3,7 +3,7 @@
 
         <div class="page-logo">
             <a href="{{URL::route('home')}}">
-                <img src="" alt="logo" class="logo-default" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTORaQqYrfLbfYj_YpqQcmbeyOkkE-S6hztGA&usqp=CAU" alt="logo" class="logo-default" />
             </a>
             <div class="menu-toggler sidebar-toggler">
                 <span></span>

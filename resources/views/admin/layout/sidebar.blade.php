@@ -68,12 +68,12 @@
                             <span class="title">Simple sliders </span>
                         </a>
                     </li> -->
-                    <li class="nav-item " id="cms-plugins-contact">
+                    <!-- <li class="nav-item " id="cms-plugins-contact">
                         <a href="" class="nav-link nav-toggle">
                             <i class="far fa-id-card"></i>
                             <span class="title">Thẻ bảo hành</span>
                         </a>
-                    </li>
+                    </li> -->
                     
                     
                     <li class="nav-item " id="cms-core-appearance">

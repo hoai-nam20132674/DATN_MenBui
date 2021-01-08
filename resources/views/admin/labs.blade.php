@@ -20,7 +20,7 @@
 <div class="page-content ">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-        <li class="breadcrumb-item active">Quản trị viên</li>
+        <li class="breadcrumb-item active">Quản lý phòng lab</li>
     </ol>
 
 
@@ -94,7 +94,7 @@
                                             <td class="text-left column-key-username sorting_1">
                                                 <a href="{{URL::route('lab',$lab->id)}}">{{$lab->name}}</a>
                                             </td>
-                                            <td class=" text-left column-key-email">100</td>
+                                            <td class=" text-left column-key-email">{{$lab->seat}}</td>
                                             
                                             <td class="  column-key-created_at">{{$lab->created_at}}</td>
                                             <td class="  column-key-status">

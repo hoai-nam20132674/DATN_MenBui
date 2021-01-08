@@ -20,7 +20,7 @@
 <div class="page-content ">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{URL::route('home')}}">Bảng điều khiển</a></li>
-        <li class="breadcrumb-item active">Quản trị viên</li>
+        <li class="breadcrumb-item active">Danh sách sinh viên</li>
     </ol>
 
 
