@@ -99,8 +99,8 @@ class HomeController extends Controller
     public function lab($id, Request $request){
         $timeIn = new Carbon($request->timeIn);
         $timeOut = new Carbon($request->timeOut);
-        $seats = Seat::where('lab_id',$id)->get();
-        return view('admin.lab', compact('seats','id','timeIn','timeOut'));
+        // $seats = Seat::where('lab_id',$id)->get();
+        return view('admin.lab', compact('id','timeIn','timeOut'));
     }
     // end lab controller
 

@@ -20,9 +20,8 @@ class Controller extends BaseController
     public function booking($id, Request $request){
         $timeIn = new Carbon($request->timeIn);
         $timeOut = new Carbon($request->timeOut);
-    	$seats = Seat::where('lab_id',$id)->get();
+        $seats = Seat::where('lab_id',$id)->get();
     	return view('booking', compact('seats','id','timeIn','timeOut'));
-    	// dd($seats[15]);
 
     }
     public function seatRender($id, Request $request){
