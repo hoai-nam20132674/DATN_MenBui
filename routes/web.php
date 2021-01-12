@@ -42,13 +42,12 @@ Route::get('admin/lab/{id}', 'HomeController@lab')->name('lab');
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Controller@home')->name('home');
 // booking 
 Route::get('booking/{id}', 'Controller@booking')->name('booking');
 Route::get('seat-render/{id}', 'Controller@seatRender')->name('seatRender');
 Route::get('check/{id}/{timeIn}/{timeOut}', 'Controller@checkSeatFree')->name('checkSeat');
+Route::get('history/{id}', 'Controller@history')->name('history');
 // end booking
 
 

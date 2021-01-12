@@ -16,13 +16,19 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
+    public function home(){
+        return redirect()->route('booking',1);
+    }
     public function booking($id, Request $request){
         $timeIn = new Carbon($request->timeIn);
         $timeOut = new Carbon($request->timeOut);
         $seats = Seat::where('lab_id',$id)->get();
     	return view('booking', compact('seats','id','timeIn','timeOut'));
 
+    }
+    public function history($id){
+        $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name')->get();
+        return view('history', compact('regis'));
     }
     public function seatRender($id, Request $request){
     	$timeIn = new Carbon($request->timeIn);
