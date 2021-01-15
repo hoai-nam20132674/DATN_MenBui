@@ -42,7 +42,7 @@ Route::get('admin/lab/{id}', 'HomeController@lab')->name('lab');
 
 
 
-Route::get('/', 'Controller@home')->name('home');
+Route::get('/', 'Controller@home')->name('homeUser');
 // booking 
 Route::get('booking/{id}', 'Controller@booking')->name('booking');
 Route::get('seat-render/{id}', 'Controller@seatRender')->name('seatRender');

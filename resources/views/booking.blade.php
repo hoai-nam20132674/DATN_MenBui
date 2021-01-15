@@ -480,9 +480,14 @@
                 url: url,
                 dataType: 'html',
                 success: function(data) {
-                    $('.seat-area').html(data); 
+                    $('.seat-area').html(data);
+
                 }
             });
+            var seat_line = $(".seat-area").attr('lab-id');
+            console.log(seat_line);
+            
+
         });
         $(document).on('click', '.seat-booking-button', function(event) {
             event.preventDefault();

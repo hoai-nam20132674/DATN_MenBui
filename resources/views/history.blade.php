@@ -298,14 +298,17 @@
 	                                @php
 	                                	Carbon\Carbon::setLocale('vi');
 	                                	$time_in = \Carbon\Carbon::createFromTimestamp(strtotime($re->time_in))->toDayDateTimeString();
+                                        $time_out = \Carbon\Carbon::createFromTimestamp(strtotime($re->time_out))->toDayDateTimeString();
 	                                @endphp
-	                                <div class="info"><span>{{ $time_in}}</span> <span>10 SEP TUE, 11:00 PM</span></div>
+	                                <div class="info"><span>{{$time_in}}</span> <span>{{$time_out}}</span></div>
 
 	                            </li>
-	                            
+	                            @if($id == Auth::user()->id)
 	                            <li style="text-align: center;">
-	                            	<a href="#0" class="custom-button back-button">proceed</a>
+	                            	<a href="#0" class="custom-button back-button">THAY ĐỔI</a>
 	                            </li>
+                                @else
+                                @endif
 	                        </ul>
 	                        @endforeach
 	                    </div>

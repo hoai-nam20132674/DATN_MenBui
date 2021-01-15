@@ -28,7 +28,7 @@ class Controller extends BaseController
     }
     public function history($id){
         $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name')->get();
-        return view('history', compact('regis'));
+        return view('history', compact('regis','id'));
     }
     public function seatRender($id, Request $request){
     	$timeIn = new Carbon($request->timeIn);
