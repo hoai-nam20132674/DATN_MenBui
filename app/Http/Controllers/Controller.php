@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Seat;
+use App\Lab;
 use App\Registration;
 use DateTime;
 use Illuminate\Http\Request;
@@ -23,12 +24,14 @@ class Controller extends BaseController
         $timeIn = new Carbon($request->timeIn);
         $timeOut = new Carbon($request->timeOut);
         $seats = Seat::where('lab_id',$id)->get();
-    	return view('booking', compact('seats','id','timeIn','timeOut'));
+        $labs = Lab::select()->get();
+    	return view('booking', compact('seats','id','timeIn','timeOut','labs'));
 
     }
     public function history($id){
+        $labs = Lab::select()->get();
         $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name')->get();
-        return view('history', compact('regis','id'));
+        return view('history', compact('regis','id','labs'));
     }
     public function seatRender($id, Request $request){
     	$timeIn = new Carbon($request->timeIn);

@@ -168,81 +168,7 @@
     <!-- ==========Overlay========== -->
 
     <!-- ==========Header-Section========== -->
-    <header class="header-section">
-        <div class="container">
-            <div class="header-wrapper">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="https://www.hust.edu.vn/hust-theme/images/logoEn.png" alt="logo">
-                    </a>
-                </div>
-                <ul class="menu">
-                    <li>
-                        <a href="#0">Trang chủ</a>
-                        
-                    </li>
-                    <li>
-                        <a href="#0" class="active">Phòng lab</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="movie-grid.html">Lab 1</a>
-                            </li>
-                            <li>
-                                <a href="movie-list.html">Lab 2</a>
-                            </li>
-                            <li>
-                                <a href="movie-details.html">Lab 3</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#0">Đặt chỗ</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="events.html">Đặt chỗ</a>
-                            </li>
-                            <li>
-                                <a href="event-details.html">Lịch sử đặt chỗ</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    
-                    
-                    <li>
-                        <a href="#0">Tin tức</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="blog.html">Blog</a>
-                            </li>
-                            <li>
-                                <a href="blog-details.html">Blog Single</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="contact.html">Liên hệ</a>
-                    </li>
-                    @if(Auth::user())
-                        <li class="header-button pr-0" id="user" user-mssv="{{Auth::user()->mssv}}" user-id="{{Auth::user()->id}}">
-                            <a href="#">{{Auth::user()->name}}</a>
-                        </li>
-                    @else
-                        <li class="header-button pr-0" id="user" user-id="0">
-                            <a href="{{URL::route('login')}}">Đăng nhập</a>
-                        </li>
-                    @endif
-                    
-                </ul>
-                <div class="header-bar d-lg-none">
-					<span></span>
-					<span></span>
-					<span></span>
-				</div>
-            </div>
-        </div>
-    </header>
+    @include('layout.header')
     <!-- ==========Header-Section========== -->
 
     <!-- ==========Banner-Section========== -->
@@ -305,8 +231,10 @@
 	                            </li>
 	                            @if($id == Auth::user()->id)
 	                            <li style="text-align: center;">
-	                            	<a href="#0" class="custom-button back-button">THAY ĐỔI</a>
+	                            	<a href="#0" class="custom-button back-button change-booking">THAY ĐỔI</a>
+                                    <a href="#0" mssv="{{Auth::user()->mssv}}" regis-id="{{$re->id}}" class="custom-button back-button delete-booking" style="background-image: -webkit-linear-gradient(169deg, #ff0000  17%, #ff0000  63%, #ff0000  100%);">HỦY LỊCH</a>
 	                            </li>
+                                
                                 @else
                                 @endif
 	                        </ul>
@@ -568,6 +496,48 @@
                   footer: ''
                 })
             }
+        });
+        $(document).on('click', '.delete-booking', function(event) {
+            event.preventDefault();
+            Swal.fire({
+              title: 'Bạn có chắc muốn hủy lịch đặt không ?',
+              text: "",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'OK, hủy lịch!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                var mssv = $(this).attr('mssv');
+                var regis_id = $(this).attr('regis-id');
+                var url = 'http://localhost:8000/user-delete-booking/'+mssv+'/'+regis_id;
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'html',
+                    success: function(data) {
+                        if(data=='1'){
+                            Swal.fire(
+                              'Hủy thành công',
+                              '',
+                              'warning'
+                            )
+
+                        }
+                        else{
+                            Swal.fire(
+                              'Lỗi hủy không thành công',
+                              '',
+                              'success'
+                            )
+                        }
+                    }
+                });
+                
+              }
+            })
+
         });
     </script>
     <script type="text/javascript">

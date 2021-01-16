@@ -129,6 +129,24 @@ class HomeController extends Controller
         }
 
     }
+    public function userDeleteBooking($mssv,$id){
+        $user = User::where('mssv',$mssv)->get();
+        if(count($user) ==0){
+            echo 0;
+        }
+        else{
+            $user = $user->first();
+            if(Auth::user()->id == $user->id){
+                $regis = Registration::where('id',$id)->get()->first();
+                $regis->delete();
+                echo 1;
+            }
+            else{
+                echo 0;
+            }
+            
+        }
+    }
     // end user booking
 
 
