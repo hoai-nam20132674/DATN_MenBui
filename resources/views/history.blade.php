@@ -187,23 +187,6 @@
     </section>
     <!-- ==========Banner-Section========== -->
 
-    
-    <!-- ==========Page-Title========== -->
-    <div class="container ajaxload">
-        <div class="row">
-            <div id="loader">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="lading"></div>
-            </div>
-        </div>
-    </div>
 
     <div class="movie-facility padding-bottom padding-top">
         <div class="container">
@@ -225,13 +208,14 @@
 	                                	Carbon\Carbon::setLocale('vi');
 	                                	$time_in = \Carbon\Carbon::createFromTimestamp(strtotime($re->time_in))->toDayDateTimeString();
                                         $time_out = \Carbon\Carbon::createFromTimestamp(strtotime($re->time_out))->toDayDateTimeString();
+                                        $now = \Carbon\Carbon::now();
 	                                @endphp
-	                                <div class="info"><span>{{$time_in}}</span> <span>{{$time_out}}</span></div>
+	                                <div class="info"><span>{{$time_in}} - {{\Carbon\Carbon::createFromTimestamp(strtotime($re->time_in))->diffForHumans($now)}}</span> <span>{{$time_out}} - {{\Carbon\Carbon::createFromTimestamp(strtotime($re->time_out))->diffForHumans($now)}}</span></div>
 
 	                            </li>
-	                            @if($id == Auth::user()->id)
+	                            @if($id == Auth::user()->id && $re->time_in > $now)
 	                            <li style="text-align: center;">
-	                            	<a href="#0" class="custom-button back-button change-booking">THAY ĐỔI</a>
+	                            	<a href="#0" class="custom-button back-button change-booking" lab-id="{{$re->lab_id}}">THAY ĐỔI</a>
                                     <a href="#0" mssv="{{Auth::user()->mssv}}" regis-id="{{$re->id}}" class="custom-button back-button delete-booking" style="background-image: -webkit-linear-gradient(169deg, #ff0000  17%, #ff0000  63%, #ff0000  100%);">HỦY LỊCH</a>
 	                            </li>
                                 
@@ -246,6 +230,98 @@
             </div>
         </div>
     </div>
+
+    
+    <div class="container ajaxload">
+        <div class="row">
+            <div id="loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="lading"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========Movie-Section========== -->
+    <div class="seat-plan-section padding-bottom padding-top">
+        <div class="container">
+            <div class="page-title-area" style="margin-bottom: 25px;">
+                <div class="row" style="width: 100%">
+                    
+                    <div class="col-md-12">
+                        
+                            <div class="row" style="width: 100%">
+
+                                
+                                    <div class="col-md-3">
+                                        <span class="date">Ngày</span>
+                                        <input type="date" onchange="seatRender()" name="date">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="date">Giờ vào</span>
+                                        <input type="time" name="timeIn" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="date">Giờ ra</span>
+                                        <input type="time" name="timeOut" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span class="date">Phòng lab</span>
+                                        <select name="type" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                            @foreach($labs as $lab)
+                                                <option value="{{$lab->id}}">{{$lab->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                
+                            </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="screen-area">
+                
+                <h5 class="subtitle">KHU VỰC CHECK IN</h5>
+                
+                <div class="screen-wrapper" id="seat-area">
+                    <ul class="seat-area" lab-id="">
+                        
+                        
+
+                    </ul>
+                </div>
+
+                <h5 class="subtitle">LỐI ĐI</h5>
+                
+            </div>
+            <div class="proceed-book bg_img" data-background="./assets/images/movie/movie-bg-proceed.jpg">
+                <div class="proceed-to-book">
+                    <div class="book-item">
+                        <span>GHẾ BẠN ĐÃ CHỌN</span>
+                        <h3 class="title seat-name"></h3>
+                    </div>
+                    <div class="book-item">
+                        <span>Số lượng</span>
+                        <h3 class="title seat-count"></h3>
+                    </div>
+                    <div class="book-item">
+                        <a href="#" class="custom-button seat-booking-button">ĐẶT LỊCH GIỮ CHỖ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ==========Movie-Section========== -->
 
     <!-- ==========Newslater-Section========== -->
     <footer class="footer-section">
@@ -322,6 +398,8 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $(".ajaxload").hide();
+            $(".page-title").hide();
+            $(".seat-plan-section").hide();
             var lab_id = $('.seat-area').attr('lab-id');
             var date = $('input[name="date"]').val();
             var timeIn = $('input[name="timeIn"]').val();
@@ -337,6 +415,34 @@
                 }
             });
         });
+
+        $(document).on('click', '.change-booking', function(event) {
+            event.preventDefault();
+            $(".page-title").show();
+            $(".seat-plan-section").show();
+            var lab_id = $(this).attr('lab-id');
+            var date = $('input[name="date"]').val();
+            var timeIn = $('input[name="timeIn"]').val();
+            var timeOut = $('input[name="timeOut"]').val();
+            var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
+            console.log(url);
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'html',
+                success: function(data) {
+                    $('.seat-area').html(data);
+
+                }
+
+            });
+            $('html, body').animate({
+                scrollTop: $(".seat-plan-section").offset().top
+            }, 2000);
+
+
+        });
+
         $(document).on('click', '.seat-booking-button', function(event) {
             event.preventDefault();
             var type_bk = $('select[name="type"]').val();
@@ -518,11 +624,14 @@
                     dataType: 'html',
                     success: function(data) {
                         if(data=='1'){
-                            Swal.fire(
-                              'Hủy thành công',
-                              '',
-                              'warning'
-                            )
+                            Swal.fire({
+                              position: 'top-end',
+                              icon: 'success',
+                              title: 'Hủy thành công',
+                              showConfirmButton: false,
+                              timer: 1500
+                            })
+                            location.reload();
 
                         }
                         else{

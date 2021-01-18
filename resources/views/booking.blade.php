@@ -211,36 +211,12 @@
 			                		<div class="col-md-3">
 			                			<span class="date">Giờ vào</span>
                                         <input type="time" name="timeIn" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
-			                			<!-- <select class="timeIn" name="timeIn" onchange="timeInFunction()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
-					                        <option value="8">08:00</option>
-					                        <option value="9">09:00</option>
-					                        <option value="10">10:00</option>
-					                        <option value="11">11:00</option>
-                                            <option value="12">12:00</option>
-                                            <option value="13">13:00</option>
-                                            <option value="14">14:00</option>
-                                            <option value="15">15:00</option>
-                                            <option value="16">16:00</option>
-                                            <option value="17">17:00</option>
-                                            
-					                    </select> -->
+			                			
 			                		</div>
 			                		<div class="col-md-3">
 			                			<span class="date">Giờ ra</span>
                                         <input type="time" name="timeOut" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
-			                			<!-- <select class="timeOut" name="timeOut" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
-					                        
-                                            <option value="9">09:00</option>
-                                            <option value="10">10:00</option>
-                                            <option value="11">11:00</option>
-                                            <option value="12">12:00</option>
-                                            <option value="13">13:00</option>
-                                            <option value="14">14:00</option>
-                                            <option value="15">15:00</option>
-                                            <option value="16">16:00</option>
-                                            <option value="17">17:00</option>
-                                            <option value="18">18:00</option>
-					                    </select> -->
+			                			
 			                		</div>
                                     <div class="col-md-3">
                                         <span class="date">Hình thức</span>
@@ -253,12 +229,7 @@
 			                </div>
 		                
 		            </div>
-	            	<!-- <div class="col-md-3">
-		                <div class="item">
-		                    <h5 class="title">05:00</h5>
-		                    <p>Mins Left</p>
-		                </div>
-		            </div> -->
+	            	
                 </div>
             </div>
         </div>
@@ -582,13 +553,14 @@
             var date = $('input[name="date"]').val();
             var timeIn = $('input[name="timeIn"]').val();
             var timeOut = $('input[name="timeOut"]').val();
-            if(timeIn==''||timeOut==''){
+            if(timeIn==''||timeOut==''||date ==''){
 
             }
             else{
                 
                 $(".ajaxload").show();
-                // Swal.showLoading()
+                $(".seat-name").text('');
+                $(".seat-count").text('');
                 var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
                 $.ajax({
                     type: 'GET',

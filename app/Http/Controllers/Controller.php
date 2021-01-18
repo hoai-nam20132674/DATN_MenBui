@@ -30,7 +30,7 @@ class Controller extends BaseController
     }
     public function history($id){
         $labs = Lab::select()->get();
-        $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name')->get();
+        $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name','seats.lab_id AS lab_id')->get();
         return view('history', compact('regis','id','labs'));
     }
     public function seatRender($id, Request $request){
