@@ -30,7 +30,7 @@ class Controller extends BaseController
     }
     public function history($id){
         $labs = Lab::select()->get();
-        $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name','seats.lab_id AS lab_id')->get();
+        $regis = Registration::join('seats','registrations.seat_id','seats.id')->where('registrations.user_id',$id)->select('registrations.*','seats.name','seats.lab_id AS lab_id')->orderBy('registrations.time_in','DESC')->get();
         return view('history', compact('regis','id','labs'));
     }
     public function seatRender($id, Request $request){
