@@ -37,7 +37,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('admin.index');
+        $labs = Lab::select()->get();
+        $seats = Seat::select()->get();
+        $users = User::where('role',0)->get();
+        $admins = User::where('role',1)->get();
+        return view('admin.index',compact('labs','seats','users','admins'));
     }
 
     // User custom
@@ -101,6 +105,17 @@ class HomeController extends Controller
         $timeOut = new Carbon($request->timeOut);
         // $seats = Seat::where('lab_id',$id)->get();
         return view('admin.lab', compact('id','timeIn','timeOut'));
+    }
+    public function addLab(){
+        return view('admin.addLab');
+    }
+    public function postAddLab(Request $request){
+        $lab = new Lab;
+        $lab->name = $request->name;
+        $lab->type = $request->type;
+        $lab->seat = 0;
+        $lab->save();
+        return redirect()->route('labs')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công']);
     }
     // end lab controller
 

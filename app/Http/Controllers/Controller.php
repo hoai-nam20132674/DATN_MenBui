@@ -25,7 +25,8 @@ class Controller extends BaseController
         $timeOut = new Carbon($request->timeOut);
         $seats = Seat::where('lab_id',$id)->get();
         $labs = Lab::select()->get();
-    	return view('booking', compact('seats','id','timeIn','timeOut','labs'));
+        $la = Lab::where('id',$id)->get()->first();
+    	return view('booking', compact('seats','id','timeIn','timeOut','labs','la'));
 
     }
     public function history($id){

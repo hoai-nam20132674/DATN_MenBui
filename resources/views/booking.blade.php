@@ -178,8 +178,8 @@
                 <div class="details-banner-content style-two">
                     <h3 class="title">ĐẶT LỊCH GIỮ CHỖ</h3>
                     <div class="tags">
-                        <a href="#0">Lab 1</a>
-                        <a href="#0">Số lượng ghế - 200</a>
+                        <a href="#0">{{$la->name}}</a>
+                        <a href="#0">Số lượng ghế - {{count($seats)}}</a>
                     </div>
                 </div>
             </div>

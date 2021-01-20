@@ -40,27 +40,28 @@
                     
                     
                     <li class="nav-item " id="cms-plugins-ecommerce">
-                        <a href="{{URL::route('labs')}}" class="nav-link nav-toggle">
+                        <a href="" class="nav-link nav-toggle">
                             <i class="fa fa-user-md"></i>
                             <span class="title">Phòng lab</span>
                             <span class="arrow "></span>
                         </a>
-                        <!-- <ul class="sub-menu  hidden-ul ">
+                        <ul class="sub-menu  hidden-ul ">
                             <li class="nav-item " id="cms-plugins-ecommerce-customer">
-                                <a href="" class="nav-link">
-                                    <i class="fa fa-users"></i>
-                                    Sản phẩm
+                                <a href="{{URL::route('labs')}}" class="nav-link">
+                                    <!-- <i class="fa fa-users"></i> -->
+                                    Danh sách phòng lab
                                 </a>
                             </li>
                             <li class="nav-item " id="cms-plugins-product-categories">
-                                <a href="" class="nav-link">
-                                    <i class="fa fa-archive"></i>
-                                    Danh mục sản phẩm
+                                <a href="{{URL::route('addLab')}}" class="nav-link">
+                                    <!-- <i class="fa fa-archive"></i> -->
+                                    Thêm phòng lab
                                 </a>
                             </li>
+
                             
                             
-                        </ul> -->
+                        </ul>
                     </li>
                     <!-- <li class="nav-item " id="cms-plugins-simple-slider">
                         <a href="#" class="nav-link nav-toggle">

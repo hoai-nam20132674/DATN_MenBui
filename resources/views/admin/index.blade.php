@@ -46,7 +46,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="3">0</span>
+                    <span data-counter="counterup" data-value="{{count($labs)}}">0</span>
                 </div>
                 <div class="desc"> Phòng lab </div>
             </div>
@@ -60,9 +60,9 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="12">0</span>
+                    <span data-counter="counterup" data-value="{{count($seats)}}">0</span>
                 </div>
-                <div class="desc"> Đã đặt </div>
+                <div class="desc"> Số ghế</div>
             </div>
         </a>
     </div>
@@ -74,9 +74,9 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="1">0</span>
+                    <span data-counter="counterup" data-value="{{count($users)}}">0</span>
                 </div>
-                <div class="desc"> Còn trống </div>
+                <div class="desc"> Tài khoản</div>
             </div>
         </a>
     </div>
@@ -88,7 +88,7 @@
             </div>
             <div class="details">
                 <div class="number">
-                    <span data-counter="counterup" data-value="1">0</span>
+                    <span data-counter="counterup" data-value="{{count($admins)}}">0</span>
                 </div>
                 <div class="desc"> Quản trị viên </div>
             </div>

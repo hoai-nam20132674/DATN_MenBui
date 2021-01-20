@@ -40,7 +40,7 @@
                     </li>
                     @if(Auth::user())
                         <li class="header-button pr-0" id="user" user-mssv="{{Auth::user()->mssv}}" user-id="{{Auth::user()->id}}">
-                            <a href="#">{{Auth::user()->name}}</a>
+                            <a href="{{URL::route('logout')}}">{{Auth::user()->name}}</a>
                         </li>
                     @else
                         <li class="header-button pr-0" id="user" user-id="0">

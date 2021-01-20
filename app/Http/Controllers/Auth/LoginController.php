@@ -76,7 +76,7 @@ class LoginController extends Controller
             return redirect()->route('login');
         }
         else{
-            return redirect()->back();
+            return redirect()->route('homeUser');
         }
     }
 }

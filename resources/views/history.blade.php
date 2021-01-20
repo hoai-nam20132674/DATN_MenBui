@@ -176,11 +176,8 @@
         <div class="container">
             <div class="details-banner-wrapper">
                 <div class="details-banner-content style-two">
-                    <h3 class="title">ĐẶT LỊCH GIỮ CHỖ</h3>
-                    <div class="tags">
-                        <a href="#0">Lab 1</a>
-                        <a href="#0">Số lượng ghế - 200</a>
-                    </div>
+                    <h3 class="title">LỊCH SỬ ĐẶT CHỖ</h3>
+                    
                 </div>
             </div>
         </div>
