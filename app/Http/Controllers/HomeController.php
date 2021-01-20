@@ -129,6 +129,29 @@ class HomeController extends Controller
         }
 
     }
+
+    public function userChangeBooking($mssv,$regis_id, Request $request){
+        $user = User::where('mssv',$mssv)->get();
+        if(count($user) ==0){
+            echo 0;
+        }
+        else{
+            $user = $user->first();
+            $regis = Registration::where('id',$regis_id)->get()->first();
+            $regis ->seat_id = $request->seatId;
+            $regis ->time_in = new Carbon($request->timeIn);
+            $regis ->time_out = new Carbon($request->timeOut);
+            if(Auth::user()->id == $user->id){
+                $regis->save();
+                echo 1;
+            }
+            else{
+                echo 0;
+            }
+            
+        }
+    }
+
     public function userDeleteBooking($mssv,$id){
         $user = User::where('mssv',$mssv)->get();
         if(count($user) ==0){

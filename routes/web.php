@@ -30,6 +30,7 @@ Route::get('admin/user/edit/{id}', 'HomeController@editUser')->name('editUser');
 Route::post('admin/user/edit/{id}', 'HomeController@postEditUser')->name('postEditUser');
 Route::post('admin/user/edit-password/{id}', 'HomeController@postEditPassword')->name('postEditPassword');
 Route::get('user-booking/{mssv}', 'HomeController@userBooking')->name('userBooking');
+Route::get('user-change-booking/{mssv}/{regis_id}', 'HomeController@userChangeBooking')->name('userChangeBooking');
 Route::get('user-delete-booking/{mssv}/{id}', 'HomeController@userDeleteBooking')->name('userDeleteBooking');
 
 // end user route

@@ -215,7 +215,7 @@
 	                            </li>
 	                            @if($id == Auth::user()->id && $re->time_in > $now)
 	                            <li style="text-align: center;">
-	                            	<a href="#0" class="custom-button back-button change-booking" lab-id="{{$re->lab_id}}">THAY ĐỔI</a>
+	                            	<a href="#0" class="custom-button back-button change-booking" lab-id="{{$re->lab_id}}" regis-id="{{$re->id}}">THAY ĐỔI</a>
                                     <a href="#0" mssv="{{Auth::user()->mssv}}" regis-id="{{$re->id}}" class="custom-button back-button delete-booking" style="background-image: -webkit-linear-gradient(169deg, #ff0000  17%, #ff0000  63%, #ff0000  100%);">HỦY LỊCH</a>
 	                            </li>
                                 
@@ -261,21 +261,21 @@
                                 
                                     <div class="col-md-3">
                                         <span class="date">Ngày</span>
-                                        <input type="date" onchange="seatRender()" name="date">
+                                        <input type="date" onchange="seatRender2()" name="date">
                                     </div>
                                     <div class="col-md-3">
                                         <span class="date">Giờ vào</span>
-                                        <input type="time" name="timeIn" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        <input type="time" name="timeIn" onchange="seatRender2()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
                                         
                                     </div>
                                     <div class="col-md-3">
                                         <span class="date">Giờ ra</span>
-                                        <input type="time" name="timeOut" onchange="seatRender()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        <input type="time" name="timeOut" onchange="seatRender2()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
                                         
                                     </div>
                                     <div class="col-md-3">
                                         <span class="date">Phòng lab</span>
-                                        <select name="type" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
+                                        <select name="lab" onchange="seatRender2()" style="background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);">
                                             @foreach($labs as $lab)
                                                 <option value="{{$lab->id}}">{{$lab->name}}</option>
                                             @endforeach
@@ -315,7 +315,7 @@
                         <h3 class="title seat-count"></h3>
                     </div>
                     <div class="book-item">
-                        <a href="#" class="custom-button seat-booking-button">ĐẶT LỊCH GIỮ CHỖ</a>
+                        <a href="#" class="custom-button change-booking-button" regis-id="">ĐỔI LỊCH</a>
                     </div>
                 </div>
             </div>
@@ -420,6 +420,8 @@
             event.preventDefault();
             $(".page-title").show();
             $(".seat-plan-section").show();
+            var regis_id = $(this).attr('regis-id');
+            $(".change-booking-button").attr('regis-id',regis_id);
             var lab_id = $(this).attr('lab-id');
             var date = $('input[name="date"]').val();
             var timeIn = $('input[name="timeIn"]').val();
@@ -443,20 +445,21 @@
 
         });
 
-        $(document).on('click', '.seat-booking-button', function(event) {
+        $(document).on('click', '.change-booking-button', function(event) {
             event.preventDefault();
-            var type_bk = $('select[name="type"]').val();
+            var type_bk = 0;
             var user_id = $('#user').attr('user-id');
             var user_mssv = $('#user').attr('user-mssv');
             if(user_id !=0){
                 if(type_bk == 0){
+                    var regis_id = $(this).attr('regis-id');
                     var seatId = $('.seat-free[check=1]').attr('seat_id');
                     var date = $('input[name="date"]').val();
                     var timeIn = $('input[name="timeIn"]').val();
                     var timeOut = $('input[name="timeOut"]').val();
                     timeIn = date+' '+timeIn;
                     timeOut = date+' '+timeOut;
-                    url = 'http://localhost:8000/user-booking/'+user_mssv+'?seatId='+seatId+'&timeIn='+timeIn+'&timeOut='+timeOut;
+                    url = 'http://localhost:8000/user-change-booking/'+user_mssv+'/'+regis_id+'?seatId='+seatId+'&timeIn='+timeIn+'&timeOut='+timeOut;
                     console.log(url);
                     $.ajax({
                         type: 'GET',
@@ -467,7 +470,7 @@
                                 Swal.fire({
                                   position: 'top-end',
                                   icon: 'success',
-                                  title: 'Đặt chỗ thành công',
+                                  title: 'Đổi lịch thành công',
                                   showConfirmButton: false,
                                   timer: 1000
                                 })
@@ -480,7 +483,7 @@
                                 Swal.fire({
                                   position: 'top-end',
                                   icon: 'error',
-                                  title: 'Đặt chỗ không thành công',
+                                  title: 'Đổi lịch không thành công',
                                   showConfirmButton: false,
                                   timer: 1000
                                 })
@@ -650,8 +653,8 @@
         });
     </script>
     <script type="text/javascript">
-        function seatRender(){
-            var lab_id = $('.seat-area').attr('lab-id');
+        function seatRender2(){
+            var lab_id = $('select[name="lab"]').val();
             var date = $('input[name="date"]').val();
             var timeIn = $('input[name="timeIn"]').val();
             var timeOut = $('input[name="timeOut"]').val();
@@ -663,6 +666,7 @@
                 $(".ajaxload").show();
                 // Swal.showLoading()
                 var url = 'http://localhost:8000/seat-render/'+lab_id+'?timeIn='+date+' '+timeIn+'&timeOut='+date+' '+timeOut;
+                console.log(url);
                 $.ajax({
                     type: 'GET',
                     url: url,
